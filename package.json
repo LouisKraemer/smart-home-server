@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "dotenv": "^7.0.0",
-    "mongoose": "^5.4.19"
+    "mongoose": "^5.4.19",
+    "ramda": "^0.26.1",
+    "ws": "^6.2.0"
   },
   "scripts": {
     "start:dev": "nodemon index.js"
