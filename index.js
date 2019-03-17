@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { initConnection } = require("./src/database");
 const { discoverYeelight } = require("./src/yeelight/discover");
 

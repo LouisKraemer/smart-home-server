@@ -2,7 +2,7 @@ const WebSocket = require("ws");
 
 const { parseIncomingMessage } = require("./utils");
 
-const wss = new WebSocket.Server({ port: 6768 });
+const wss = new WebSocket.Server({ port: process.env.WEBSOCKET_PORT });
 
 const initWs = () => {
   wss.on("connection", ws => {

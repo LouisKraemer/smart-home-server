@@ -3,7 +3,7 @@ mongoose.Promise = Promise;
 
 const initConnection = () =>
   mongoose
-    .connect("mongodb://localhost/smart-db", {
+    .connect(`mongodb://${process.env.DB_HOST}/smart-db`, {
       useNewUrlParser: true,
       autoReconnect: true,
       useFindAndModify: false
