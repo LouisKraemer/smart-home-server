@@ -31,7 +31,12 @@ const setYeelightName = ({ deviceId, name }) => {
 };
 
 const setYeelightBright = ({ deviceId, bright }) => {
-  setBright({ deviceId, bright });
+  getYeelight({ deviceId })
+    .then(({ power }) => {
+      if (!power) return setPower({ deviceId, power: true });
+      return Promise.resolve();
+    })
+    .then(() => setBright({ deviceId, bright }));
   return { shouldRespond: false };
 };
 
