@@ -3,9 +3,10 @@ mongoose.Promise = Promise;
 
 const initConnection = () =>
   mongoose
-    .connect("mongodb://mongo:27017", {
-      useNewUrlParser: false,
-      autoReconnect: true
+    .connect("mongodb://localhost/smart-db", {
+      useNewUrlParser: true,
+      autoReconnect: true,
+      useFindAndModify: false
     })
     .then(() => console.log("Connected to database"))
     .catch(err => {
@@ -13,4 +14,4 @@ const initConnection = () =>
       setTimeout(initConnection, 1000);
     });
 
-initConnection();
+module.exports = { initConnection };
