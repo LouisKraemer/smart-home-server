@@ -14,6 +14,7 @@
     "yeelight-awesome": "^1.0.12"
   },
   "scripts": {
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "start:prod": "pm2 start index.js"
   }
 }
