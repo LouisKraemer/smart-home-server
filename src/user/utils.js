@@ -16,11 +16,10 @@ const checkPassword = (password, hashedPassword) =>
 
 const generateJWT = userId => jwt.sign({ userId }, process.env.JWT_SECRET_KEY);
 
-const checkJWT = async token => {
+const checkJWT = token => {
   try {
-    const { userId } = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    const user = await findUserById(userId);
-    return user ? true : false;
+    jwt.verify(token, process.env.JWT_SECRET_KEY);
+    return true;
   } catch (error) {
     return false;
   }
