@@ -7,7 +7,7 @@ const { UNAUTHORIZED } = require("./constants");
 const wss = new WebSocket.Server({
   port: process.env.WEBSOCKET_PORT,
   verifyClient: (info, cb) => {
-    const token = info.req.headers.token;
+    const token = info.req.url.substring(1);
     if (!token) cb(false, 401, UNAUTHORIZED);
     else {
       const isJWTValid = checkJWT(token);
