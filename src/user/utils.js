@@ -14,7 +14,7 @@ const hashPassword = password => bcrypt.hash(password, process.env.SALT);
 const checkPassword = (password, hashedPassword) =>
   bcrypt.compare(password, hashedPassword);
 
-const generateJWT = userId => jwt.sign({ userId }, process.env.JWT_SECRET_KEY);
+const generateJWT = id => jwt.sign({ id }, process.env.JWT_SECRET_KEY);
 
 const checkJWT = token => {
   try {
