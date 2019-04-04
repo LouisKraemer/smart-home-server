@@ -17,8 +17,14 @@ const setBright = ({ deviceId, bright }) => {
   if (yeelight) yeelight.setBright(bright, EFFECT);
 };
 
+const setColorTemperature = ({ deviceId, colorTemperature }) => {
+  const yeelight = getYeelightInstance(deviceId);
+  if (yeelight) yeelight.setCtAbx(colorTemperature, EFFECT);
+};
+
 module.exports = {
   setPower,
   setName,
-  setBright
+  setBright,
+  setColorTemperature
 };

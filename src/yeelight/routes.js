@@ -3,7 +3,8 @@ const {
   GET,
   SET_POWER_ENDPOINT,
   SET_NAME_ENDPOINT,
-  SET_BRIGHT_ENDPOINT
+  SET_BRIGHT_ENDPOINT,
+  SET_COLOR_TEMPERATURE
 } = require("./constants");
 
 const {
@@ -11,7 +12,8 @@ const {
   getOneYeelight,
   setYeelightPower,
   setYeelightName,
-  setYeelightBright
+  setYeelightBright,
+  setYeelightColorTemperature
 } = require("./methods");
 
 const yeelightRoutes = {
@@ -19,7 +21,8 @@ const yeelightRoutes = {
   [GET]: getOneYeelight,
   [SET_POWER_ENDPOINT]: setYeelightPower,
   [SET_NAME_ENDPOINT]: setYeelightName,
-  [SET_BRIGHT_ENDPOINT]: setYeelightBright
+  [SET_BRIGHT_ENDPOINT]: setYeelightBright,
+  [SET_COLOR_TEMPERATURE]: setYeelightColorTemperature
 };
 
 module.exports = {

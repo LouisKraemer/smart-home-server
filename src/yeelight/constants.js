@@ -3,6 +3,7 @@ const GET_ALL = "yeelight::getAll";
 const SET_POWER_ENDPOINT = "yeelight::setPower";
 const SET_NAME_ENDPOINT = "yeelight::setName";
 const SET_BRIGHT_ENDPOINT = "yeelight::setBright";
+const SET_COLOR_TEMPERATURE="yeelight::setColorTemperature";
 
 const POWER = "power";
 const NAME = "name";
@@ -16,6 +17,7 @@ const SET_BRIGHT = "set_bright";
 const SET_NAME = "set_name";
 const SET_RGB = "set_rgb";
 const GET_PROPS = "get_prop";
+const SET_CT_ABX = "set_ct_abx";
 
 module.exports = {
   GET_ALL,
@@ -23,6 +25,7 @@ module.exports = {
   SET_POWER_ENDPOINT,
   SET_NAME_ENDPOINT,
   SET_BRIGHT_ENDPOINT,
+  SET_COLOR_TEMPERATURE
   PROPS,
   BRIGHT,
   RGB,
@@ -32,5 +35,6 @@ module.exports = {
   SET_BRIGHT,
   SET_NAME,
   SET_RGB,
-  GET_PROPS
+  GET_PROPS,
+  SET_CT_ABX
 };
