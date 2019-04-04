@@ -3,7 +3,8 @@ const {
   setPower,
   setName,
   setBright,
-  setColorTemperature
+  setColorTemperature,
+  setRGBColor
 } = require("./actions");
 const { GET_ALL, GET } = require("./constants");
 
@@ -52,11 +53,19 @@ const setYeelightColorTemperature = async ({ deviceId, colorTemperature }) => {
   return { shouldRespond: false };
 };
 
+const setYeelightRGBColor = async ({ deviceId, r, g, b }) => {
+  const { power } = await getYeelight({ deviceId });
+  if (!power) setPower({ deviceId, power: true });
+  setRGBColor({ deviceId, r, g, b });
+  return { shouldRespond: false };
+};
+
 module.exports = {
   getAllYeelights,
   getOneYeelight,
   setYeelightPower,
   setYeelightName,
   setYeelightBright,
-  setYeelightColorTemperature
+  setYeelightColorTemperature,
+  setYeelightRGBColor
 };

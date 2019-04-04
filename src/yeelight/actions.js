@@ -1,5 +1,7 @@
 const { getYeelightInstance } = require("./store");
 
+const { Color } = require("yeelight-awesome");
+
 const EFFECT = "smooth";
 
 const setPower = ({ deviceId, power }) => {
@@ -22,9 +24,15 @@ const setColorTemperature = ({ deviceId, colorTemperature }) => {
   if (yeelight) yeelight.setCtAbx(colorTemperature, EFFECT);
 };
 
+const setRGBColor = ({ deviceId, r, g, b }) => {
+  const yeelight = getYeelightInstance(deviceId);
+  if (yeelight) yeelight.setRGB(new Color(r, g, b), EFFECT);
+};
+
 module.exports = {
   setPower,
   setName,
   setBright,
-  setColorTemperature
+  setColorTemperature,
+  setRGBColor
 };
