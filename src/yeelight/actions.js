@@ -19,9 +19,9 @@ const setBright = ({ deviceId, bright }) => {
   if (yeelight) yeelight.setBright(bright, EFFECT);
 };
 
-const setColorTemperature = ({ deviceId, colorTemperature }) => {
+const setColorTemperature = ({ deviceId, ct }) => {
   const yeelight = getYeelightInstance(deviceId);
-  if (yeelight) yeelight.setCtAbx(colorTemperature, EFFECT);
+  if (yeelight) yeelight.setCtAbx(ct, EFFECT);
 };
 
 const setRGBColor = ({ deviceId, r, g, b }) => {

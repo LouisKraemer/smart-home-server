@@ -1,4 +1,4 @@
-const { initUserRoutes } = require("./src/user/routes");
+const { initUserRoutes } = require("./user/routes");
 
 const initRoutes = app => {
   initUserRoutes(app);

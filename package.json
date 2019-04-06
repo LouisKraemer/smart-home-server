@@ -14,11 +14,12 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.19",
     "ramda": "^0.26.1",
+    "smart-home-config": "^1.0.0",
     "ws": "^6.2.0",
     "yeelight-awesome": "^1.0.12"
   },
   "scripts": {
-    "start:dev": "nodemon index.js",
-    "start:prod": "pm2 start index.js"
+    "start:dev": "nodemon ./src/index.js",
+    "start:prod": "pm2 start ./src/index.js"
   }
 }

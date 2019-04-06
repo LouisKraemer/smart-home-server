@@ -46,10 +46,10 @@ const setYeelightBright = ({ deviceId, bright }) => {
   return { shouldRespond: false };
 };
 
-const setYeelightColorTemperature = async ({ deviceId, colorTemperature }) => {
+const setYeelightColorTemperature = async ({ deviceId, ct }) => {
   const { power } = await getYeelight({ deviceId });
   if (!power) setPower({ deviceId, power: true });
-  setColorTemperature({ deviceId, colorTemperature });
+  setColorTemperature({ deviceId, ct });
   return { shouldRespond: false };
 };
 

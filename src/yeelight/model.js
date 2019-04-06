@@ -9,6 +9,8 @@ const yeelightSchema = new Schema({
   power: Boolean,
   bright: Number,
   rgb: String,
+  ct: Number,
+  color_mode: Number,
   connected: Boolean
 });
 
