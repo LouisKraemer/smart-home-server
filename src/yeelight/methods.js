@@ -36,13 +36,10 @@ const setYeelightName = ({ deviceId, name }) => {
   return { shouldRespond: false };
 };
 
-const setYeelightBright = ({ deviceId, bright }) => {
-  getYeelight({ deviceId })
-    .then(({ power }) => {
-      if (!power) return setPower({ deviceId, power: true });
-      return Promise.resolve();
-    })
-    .then(() => setBright({ deviceId, bright }));
+const setYeelightBright = async ({ deviceId, bright }) => {
+  const { power } = await getYeelight({ deviceId });
+  if (!power) setPower({ deviceId, power: true });
+  setBright({ deviceId, bright });
   return { shouldRespond: false };
 };
 
