@@ -1947,10 +1947,10 @@ sliced@1.0.1:
   resolved "https://registry.yarnpkg.com/sliced/-/sliced-1.0.1.tgz#0b3a662b5d04c3177b1926bea82b03f837a2ef41"
   integrity sha1-CzpmK10Ewxd7GSa+qCsD+Dei70E=
 
-smart-home-config@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/smart-home-config/-/smart-home-config-1.0.0.tgz#98fa696968293328653bca8dd5968bb2fc37754b"
-  integrity sha512-9eJIrPPeVRmo6NJsdsldJthB4gMfibLnXNbAKhVsI4W+jakZ+eF23GQpaGuFW+swnNwxqM0P6tdUovuQksIzEg==
+smart-home-config@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/smart-home-config/-/smart-home-config-1.0.1.tgz#8c55417fa2cb354fe19f2a2e5a0fc66c89aa7c8e"
+  integrity sha512-M2Jt1B8BgpftwzLZSRN9x9I4WNQjjiTvhZnZgBYGqnghc5yQOfgBTHetz3LkjobEC3icCzmBreNjzHVp2zcNrA==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
