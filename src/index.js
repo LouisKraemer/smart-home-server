@@ -23,7 +23,3 @@ initConnection().then(() => {
     console.log(`Http server started on port ${process.env.EXPRESS_PORT}`);
   });
 });
-
-// const { GET_ALL } = require("smart-home-config");
-
-// console.log("GET_ALL", GET_ALL);

@@ -1,4 +1,5 @@
 const y = require("yeelight-awesome");
+const { GET } = require("smart-home-config/yeelight");
 
 const {
   formatProps,
@@ -20,7 +21,6 @@ const {
   SET_NAME,
   SET_POWER,
   SET_RGB,
-  GET,
   SET_CT_ABX
 } = require("./constants");
 

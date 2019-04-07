@@ -6,7 +6,7 @@ const {
   setColorTemperature,
   setRGBColor
 } = require("./actions");
-const { GET_ALL, GET } = require("./constants");
+const { GET_ALL, GET } = require("smart-home-config/yeelight");
 
 const getAllYeelights = () =>
   getYeelights().then(data => ({
