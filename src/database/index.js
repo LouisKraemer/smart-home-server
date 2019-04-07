@@ -3,11 +3,14 @@ mongoose.Promise = Promise;
 
 const initConnection = () =>
   mongoose
-    .connect(`mongodb://${process.env.DB_HOST}/smart-db`, {
-      useNewUrlParser: true,
-      autoReconnect: true,
-      useFindAndModify: false
-    })
+    .connect(
+      `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/smart-db`,
+      {
+        useNewUrlParser: true,
+        autoReconnect: true,
+        useFindAndModify: false
+      }
+    )
     .then(() => console.log("Connected to database"))
     .catch(err => {
       console.log("Error connecting to database, retrying in 1 second");
