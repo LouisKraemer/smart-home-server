@@ -9,7 +9,8 @@ const areFieldsMissing = ({ firstName, lastName, pseudo }) =>
 const arePasswordsTheSame = (password, checkPassword) =>
   password === checkPassword;
 
-const hashPassword = password => bcrypt.hash(password, process.env.SALT);
+const hashPassword = password =>
+  bcrypt.hash(password, parseInt(process.env.SALT, 10));
 
 const checkPassword = (password, hashedPassword) =>
   bcrypt.compare(password, hashedPassword);
