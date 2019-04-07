@@ -1,12 +1,14 @@
 const {
-  GET_ALL,
-  GET,
-  SET_POWER_ENDPOINT,
-  SET_NAME_ENDPOINT,
-  SET_BRIGHT_ENDPOINT,
-  SET_COLOR_TEMPERATURE,
-  SET_RGB_COLOR
-} = require("./constants");
+  yeelight: {
+    GET_ALL,
+    GET,
+    SET_POWER_ENDPOINT,
+    SET_NAME_ENDPOINT,
+    SET_BRIGHT_ENDPOINT,
+    SET_COLOR_TEMPERATURE,
+    SET_RGB_COLOR
+  }
+} = require("smart-home-config");
 
 const {
   getAllYeelights,
