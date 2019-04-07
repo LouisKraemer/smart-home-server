@@ -12,7 +12,7 @@ const getAllYeelights = () =>
   getYeelights().then(data => ({
     shouldRespond: true,
     payload: {
-      endpoint: GET_ALL,
+      type: GET_ALL,
       payload: data
     }
   }));
@@ -21,7 +21,7 @@ const getOneYeelight = ({ deviceId }) =>
   getYeelight({ deviceId }).then(data => ({
     shouldRespond: true,
     payload: {
-      endpoint: GET,
+      type: GET,
       payload: data
     }
   }));

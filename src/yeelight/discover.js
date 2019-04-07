@@ -27,7 +27,7 @@ const {
 const broadcastNewYeelightState = (deviceId, newState) =>
   broadcast(
     JSON.stringify({
-      endpoint: GET,
+      type: GET,
       payload: { deviceId, ...newState }
     })
   );

@@ -3,12 +3,12 @@ const { routes } = require("./routes");
 const parseIncomingMessage = message =>
   Promise.resolve(message)
     .then(JSON.parse)
-    .then(({ endpoint, payload }) => {
-      if (!endpoint) throw new Error("INVALID_INCOMING_MESSAGE");
-      if (!routes[endpoint]) throw new Error("INVALID_ENDPOINT");
-      console.log("endpoint", endpoint);
+    .then(({ type, payload }) => {
+      if (!type) throw new Error("INVALID_INCOMING_MESSAGE");
+      if (!routes[type]) throw new Error("INVALID_TYPE");
+      console.log("type", type);
       console.log("payload", payload);
-      return routes[endpoint](payload);
+      return routes[type](payload);
     })
     .then(({ shouldRespond, payload }) => ({
       shouldRespond,
