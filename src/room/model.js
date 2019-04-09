@@ -31,7 +31,13 @@ const upsertRoomWithUsersAndYeelight = (roomId, users, yeelights) =>
     { upsert: true }
   ).exec();
 
+const getRoomsForUser = userId =>
+  Room.find({ users: userId })
+    .populate("yeelights")
+    .exec();
+
 module.exports = {
   createRoom,
-  upsertRoomWithUsersAndYeelight
+  upsertRoomWithUsersAndYeelight,
+  getRoomsForUser
 };

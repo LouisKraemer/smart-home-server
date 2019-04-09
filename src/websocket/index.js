@@ -1,7 +1,7 @@
 const WebSocket = require("ws");
 
 const { parseIncomingMessage } = require("./utils");
-const { checkJWT } = require("../user/utils");
+const { checkJWT, extractIdFromJWT } = require("../user/utils");
 const { UNAUTHORIZED } = require("./constants");
 
 const wss = new WebSocket.Server({
@@ -21,15 +21,22 @@ const wss = new WebSocket.Server({
 });
 
 const initWs = () => {
-  wss.on("connection", ws => {
+  wss.on("connection", (ws, request) => {
     console.log("New ws connection !");
-    ws.on("message", message =>
-      Promise.resolve(message)
-        .then(parseIncomingMessage)
-        .then(({ shouldRespond, payload }) => {
-          if (shouldRespond) ws.send(payload);
-        })
-    );
+    const token = request.url.substring(1);
+    const id = extractIdFromJWT(token);
+    ws.userId = id;
+    ws.on("message", async message => {
+      try {
+        const { shouldRespond, payload } = await parseIncomingMessage(
+          id,
+          message
+        );
+        if (shouldRespond) ws.send(payload);
+      } catch (error) {
+        console.error(`Error executing message ${message}`);
+      }
+    });
   });
 };
 
@@ -40,6 +47,8 @@ broadcast = data => {
     }
   });
 };
+
+setTimeout(() => broadcast("test"), 4000);
 
 module.exports = {
   initWs,

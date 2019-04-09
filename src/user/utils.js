@@ -26,11 +26,21 @@ const checkJWT = token => {
   }
 };
 
+const extractIdFromJWT = token => {
+  try {
+    const { id } = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    return id;
+  } catch (error) {
+    return false;
+  }
+};
+
 module.exports = {
   areFieldsMissing,
   arePasswordsTheSame,
   hashPassword,
   checkPassword,
   generateJWT,
-  checkJWT
+  checkJWT,
+  extractIdFromJWT
 };

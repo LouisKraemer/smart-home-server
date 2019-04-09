@@ -1,4 +1,7 @@
+const { flatten, compose, pluck } = require("ramda");
+
 const { getYeelights, getYeelight } = require("./model");
+const { getRoomsForUser } = require("../room/model");
 const {
   setPower,
   setName,
@@ -8,14 +11,20 @@ const {
 } = require("./actions");
 const { GET_ALL, GET } = require("smart-home-config/yeelight");
 
-const getAllYeelights = () =>
-  getYeelights().then(data => ({
+const getAllYeelightsForUser = async ({ userId }) => {
+  const rooms = await getRoomsForUser(userId);
+  const yeelights = compose(
+    flatten,
+    pluck("yeelights")
+  )(rooms);
+  return {
     shouldRespond: true,
     payload: {
       type: GET_ALL,
-      payload: data
+      payload: yeelights
     }
-  }));
+  };
+};
 
 const getOneYeelight = ({ deviceId }) =>
   getYeelight({ deviceId }).then(data => ({
@@ -58,7 +67,7 @@ const setYeelightRGBColor = async ({ deviceId, r, g, b }) => {
 };
 
 module.exports = {
-  getAllYeelights,
+  getAllYeelightsForUser,
   getOneYeelight,
   setYeelightPower,
   setYeelightName,

@@ -1,6 +1,6 @@
 const { routes } = require("./routes");
 
-const parseIncomingMessage = message =>
+const parseIncomingMessage = (userId, message) =>
   Promise.resolve(message)
     .then(JSON.parse)
     .then(({ type, payload }) => {
@@ -8,7 +8,7 @@ const parseIncomingMessage = message =>
       if (!routes[type]) throw new Error("INVALID_TYPE");
       console.log("type", type);
       console.log("payload", payload);
-      return routes[type](payload);
+      return routes[type]({ ...payload, userId });
     })
     .then(({ shouldRespond, payload }) => ({
       shouldRespond,

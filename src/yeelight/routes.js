@@ -11,7 +11,7 @@ const {
 } = require("smart-home-config");
 
 const {
-  getAllYeelights,
+  getAllYeelightsForUser,
   getOneYeelight,
   setYeelightPower,
   setYeelightName,
@@ -21,7 +21,7 @@ const {
 } = require("./methods");
 
 const yeelightRoutes = {
-  [GET_ALL]: getAllYeelights,
+  [GET_ALL]: getAllYeelightsForUser,
   [GET]: getOneYeelight,
   [SET_POWER_ENDPOINT]: setYeelightPower,
   [SET_NAME_ENDPOINT]: setYeelightName,
