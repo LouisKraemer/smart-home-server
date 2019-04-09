@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
 
 const yeelightSchema = new Schema({
   deviceId: String,
+  room: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Room"
+  },
   name: String,
   power: Boolean,
   bright: Number,
@@ -19,6 +23,9 @@ const Yeelight = mongoose.model("Yeelight", yeelightSchema);
 const upsertYeelight = (deviceId, props) =>
   Yeelight.findOneAndUpdate({ deviceId }, props, { upsert: true }).exec();
 
+const upsertYeelightWithRoom = (id, roomId) =>
+  Yeelight.findByIdAndUpdate(id, { room: roomId }).exec();
+
 const getYeelights = () =>
   Yeelight.find(
     {},
@@ -31,8 +38,13 @@ const getYeelight = ({ deviceId }) =>
     "deviceId name power bright rgb connected ct color_mode"
   ).exec();
 
+const findYeelightByDeviceId = deviceId =>
+  Yeelight.findOne({ deviceId }).exec();
+
 module.exports = {
   upsertYeelight,
+  upsertYeelightWithRoom,
   getYeelight,
-  getYeelights
+  getYeelights,
+  findYeelightByDeviceId
 };

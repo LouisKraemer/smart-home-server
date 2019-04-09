@@ -114,14 +114,7 @@ const discoverYeelight = () => {
       console.log(`Yeelight ${device.id} disconnected`);
     });
 
-    yeelight
-      .connect()
-      .then(() => yeelight.getProperty(PROPS))
-      .then(() => upsertYeelight(device.id, { connected: true }));
-    // .then(formatProps)
-    // .then(data => console.log("data", data));
-    // .then(() => addYeelight(device.id, {}));
-    // }
+    yeelight.connect().then(() => yeelight.getProperty(PROPS));
   });
 
   discover.start();
