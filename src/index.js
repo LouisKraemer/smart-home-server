@@ -2,6 +2,8 @@ const path = require("path");
 
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
+const { configureRooms } = require("./seed/configureRoom");
+
 const express = require("express");
 const app = express();
 
@@ -18,10 +20,20 @@ const { initRoutes } = require("./routes");
 
 initRoutes(app);
 
-initConnection().then(() => {
-  initWs();
-  discoverYeelight();
+init = async () => {
+  await Promise.all([
+    configureRooms(),
+    initConnection(),
+    initWs(),
+    discoverYeelight()
+  ]);
   app.listen(process.env.EXPRESS_PORT, function() {
     console.log(`Http server started on port ${process.env.EXPRESS_PORT}`);
   });
-});
+};
+
+try {
+  init();
+} catch (error) {
+  console.error("Error starting server", error);
+}

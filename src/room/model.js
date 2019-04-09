@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 
 const roomSchema = new Schema({
   name: String,
+  roomId: String,
   users: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -23,18 +24,14 @@ const Room = mongoose.model("Room", roomSchema);
 
 const createRoom = room => new Room(room).save();
 
-const getUsersFromRoom = roomId =>
-  Room.findById({ id: roomId })
-    .populate("users")
-    .exec();
-
-const getYeelightsFromRoom = roomId =>
-  Room.findById({ id: roomId })
-    .populate("yeelights")
-    .exec();
+const upsertRoomWithUsersAndYeelight = (roomId, users, yeelights) =>
+  Room.findOneAndUpdate(
+    { roomId },
+    { users, yeelights },
+    { upsert: true }
+  ).exec();
 
 module.exports = {
   createRoom,
-  getUsersFromRoom,
-  getYeelightsFromRoom
+  upsertRoomWithUsersAndYeelight
 };
