@@ -41,10 +41,16 @@ const getYeelight = ({ deviceId }) =>
 const findYeelightByDeviceId = deviceId =>
   Yeelight.findOne({ deviceId }).exec();
 
+const getRoomFromYeelight = deviceId =>
+  Yeelight.findOne({ deviceId })
+    .populate("room")
+    .exec();
+
 module.exports = {
   upsertYeelight,
   upsertYeelightWithRoom,
   getYeelight,
   getYeelights,
-  findYeelightByDeviceId
+  findYeelightByDeviceId,
+  getRoomFromYeelight
 };

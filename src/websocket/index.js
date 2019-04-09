@@ -2,6 +2,7 @@ const WebSocket = require("ws");
 
 const { parseIncomingMessage } = require("./utils");
 const { checkJWT, extractIdFromJWT } = require("../user/utils");
+const { isUserAllowedToReceiveUpdates } = require("../yeelight/utils");
 const { UNAUTHORIZED } = require("./constants");
 
 const wss = new WebSocket.Server({
@@ -40,15 +41,17 @@ const initWs = () => {
   });
 };
 
-broadcast = data => {
-  wss.clients.forEach(client => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(data);
+broadcast = (deviceId, message) => {
+  wss.clients.forEach(async client => {
+    const userShouldBeUpdated = await isUserAllowedToReceiveUpdates(
+      deviceId,
+      client.userId
+    );
+    if (userShouldBeUpdated && client.readyState === WebSocket.OPEN) {
+      client.send(message);
     }
   });
 };
-
-setTimeout(() => broadcast("test"), 4000);
 
 module.exports = {
   initWs,
