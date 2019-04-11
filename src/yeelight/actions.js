@@ -4,6 +4,11 @@ const { Color } = require("yeelight-awesome");
 
 const EFFECT = "smooth";
 
+const toggle = ({ deviceId }) => {
+  const yeelight = getYeelightInstance(deviceId);
+  if (yeelight) yeelight.toggle();
+};
+
 const setPower = ({ deviceId, power }) => {
   const yeelight = getYeelightInstance(deviceId);
   if (yeelight) yeelight.setPower(power, EFFECT);
@@ -30,6 +35,7 @@ const setRGBColor = ({ deviceId, r, g, b }) => {
 };
 
 module.exports = {
+  toggle,
   setPower,
   setName,
   setBright,

@@ -3,7 +3,9 @@ const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
 const { configureRooms } = require("./seed/configureRoom");
+const { configureSwitches } = require("./seed/configureSwitch");
 const { initPingYeelight } = require("./seed/cron");
+const { initMQTT } = require("./switch/listener");
 
 const express = require("express");
 const app = express();
@@ -24,8 +26,10 @@ initRoutes(app);
 init = async () => {
   await initConnection();
   await configureRooms();
+  await configureSwitches();
   await Promise.all([
     // initPingYeelight(),
+    initMQTT(),
     initWs(),
     discoverYeelight()
   ]);

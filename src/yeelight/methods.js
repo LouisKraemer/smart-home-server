@@ -3,6 +3,7 @@ const { flatten, compose, pluck } = require("ramda");
 const { getYeelights, getYeelight } = require("./model");
 const { getRoomsForUser } = require("../room/model");
 const {
+  toggle,
   setPower,
   setName,
   setBright,
@@ -34,6 +35,8 @@ const getOneYeelight = ({ deviceId }) =>
       payload: data
     }
   }));
+
+const toggleYeelight = deviceId => toggle({ deviceId });
 
 const setYeelightPower = ({ deviceId, power }) => {
   setPower({ deviceId, power });
@@ -69,6 +72,7 @@ const setYeelightRGBColor = async ({ deviceId, r, g, b }) => {
 module.exports = {
   getAllYeelightsForUser,
   getOneYeelight,
+  toggleYeelight,
   setYeelightPower,
   setYeelightName,
   setYeelightBright,
