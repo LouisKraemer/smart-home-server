@@ -35,7 +35,7 @@ init = async () => {
 };
 
 try {
-  init().then(() => console.log("ended"));
+  init();
 } catch (error) {
   console.error("Error starting server", error);
 }
