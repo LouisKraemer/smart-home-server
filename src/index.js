@@ -3,6 +3,7 @@ const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
 const { configureRooms } = require("./seed/configureRoom");
+const { initPingYeelight } = require("./seed/cron");
 
 const express = require("express");
 const app = express();
@@ -21,9 +22,10 @@ const { initRoutes } = require("./routes");
 initRoutes(app);
 
 init = async () => {
+  await initConnection();
+  await configureRooms();
   await Promise.all([
-    configureRooms(),
-    initConnection(),
+    // initPingYeelight(),
     initWs(),
     discoverYeelight()
   ]);
@@ -33,7 +35,7 @@ init = async () => {
 };
 
 try {
-  init();
+  init().then(() => console.log("ended"));
 } catch (error) {
   console.error("Error starting server", error);
 }
