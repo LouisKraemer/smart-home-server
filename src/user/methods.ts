@@ -1,22 +1,23 @@
-const { isNil } = require("ramda");
+import { isNil } from "ramda";
 
-const { createUser: createUserInDB, findUserByPseudo } = require("./model");
-const {
+import { createUser as createUserInDB, findUserByPseudo } from "./model";
+import {
   areFieldsMissing,
   arePasswordsTheSame,
   hashPassword,
   checkPassword,
   generateJWT
-} = require("./utils");
-const {
+} from "./utils";
+import {
   PASSWORDS_ARE_NOT_THE_SAME,
   FIELDS_MISSING,
   USER_NOT_FOUND,
   INCORRECT_PASSWORD,
   USER_ALREADY_EXISTS
-} = require("./constants");
+} from "./constants";
 
-const createUser = async ({ password, checkPassword, ...rest }) => {
+export const createUser = async ({ password, checkPassword, ...rest }) => {
+  //@ts-ignore
   if (areFieldsMissing(rest)) throw new Error(FIELDS_MISSING);
   const alreadyExistingUser = await findUserByPseudo(rest.pseudo);
   if (alreadyExistingUser) throw new Error(USER_ALREADY_EXISTS);
@@ -28,16 +29,11 @@ const createUser = async ({ password, checkPassword, ...rest }) => {
   return token;
 };
 
-const login = async ({ pseudo, password }) => {
+export const login = async ({ pseudo, password }) => {
   const user = await findUserByPseudo(pseudo);
   if (isNil(user)) throw new Error(USER_NOT_FOUND);
   const isPasswordGood = await checkPassword(password, user.password);
   if (!isPasswordGood) throw new Error(INCORRECT_PASSWORD);
   const token = generateJWT(user._id);
   return token;
-};
-
-module.exports = {
-  createUser,
-  login
 };

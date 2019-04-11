@@ -1,16 +1,6 @@
-const {
-  yeelight: {
-    GET_ALL,
-    GET,
-    SET_POWER_ENDPOINT,
-    SET_NAME_ENDPOINT,
-    SET_BRIGHT_ENDPOINT,
-    SET_COLOR_TEMPERATURE,
-    SET_RGB_COLOR
-  }
-} = require("smart-home-config");
+import { yeelight } from "smart-home-config";
 
-const {
+import {
   getAllYeelightsForUser,
   getOneYeelight,
   setYeelightPower,
@@ -18,9 +8,19 @@ const {
   setYeelightBright,
   setYeelightColorTemperature,
   setYeelightRGBColor
-} = require("./methods");
+} from "./methods";
 
-const yeelightRoutes = {
+const {
+  GET_ALL,
+  GET,
+  SET_POWER_ENDPOINT,
+  SET_NAME_ENDPOINT,
+  SET_BRIGHT_ENDPOINT,
+  SET_COLOR_TEMPERATURE,
+  SET_RGB_COLOR
+} = yeelight;
+
+export const yeelightRoutes = {
   [GET_ALL]: getAllYeelightsForUser,
   [GET]: getOneYeelight,
   [SET_POWER_ENDPOINT]: setYeelightPower,
@@ -28,8 +28,4 @@ const yeelightRoutes = {
   [SET_BRIGHT_ENDPOINT]: setYeelightBright,
   [SET_COLOR_TEMPERATURE]: setYeelightColorTemperature,
   [SET_RGB_COLOR]: setYeelightRGBColor
-};
-
-module.exports = {
-  yeelightRoutes
 };

@@ -1,20 +1,20 @@
-const y = require("yeelight-awesome");
-const { GET } = require("smart-home-config/yeelight");
+import { Yeelight, Discover } from "yeelight-awesome";
+import { GET } from "smart-home-config/yeelight";
 
-const {
+import {
   formatProps,
   getPower,
   getName,
   getBright,
   getColorTemperature,
   getRBGColor
-} = require("./utils");
+} from "./utils";
 
-const { upsertYeelight } = require("./model");
-const { newYeelight } = require("./store");
-const { broadcast } = require("../websocket");
+import { upsertYeelight } from "./model";
+import { newYeelight } from "./store";
+import { broadcast } from "../websocket";
 
-const {
+import {
   PROPS,
   GET_PROPS,
   SET_BRIGHT,
@@ -22,7 +22,7 @@ const {
   SET_POWER,
   SET_RGB,
   SET_CT_ABX
-} = require("./constants");
+} from "./constants";
 
 const broadcastNewYeelightState = (deviceId, newState) =>
   broadcast(
@@ -33,16 +33,15 @@ const broadcastNewYeelightState = (deviceId, newState) =>
     })
   );
 
-const discoverYeelight = () => {
+export const discoverYeelight = () => {
   console.log("Discovering yeelights");
-  const discover = new y.Discover({
+  const discover = new Discover({
     port: 1982,
     debug: true,
     fallback: false
   });
   discover.on("deviceAdded", device => {
-    // if (device.id === "0x0000000007dd1760") {
-    const yeelight = new y.Yeelight({
+    const yeelight = new Yeelight({
       lightIp: device.host,
       lightPort: device.port
     });

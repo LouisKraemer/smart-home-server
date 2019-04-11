@@ -17,11 +17,13 @@
     "mqtt": "^2.18.8",
     "ramda": "^0.26.1",
     "smart-home-config": "1.0.1",
+    "typescript": "^3.4.3",
     "ws": "^6.2.0",
     "yeelight-awesome": "^1.0.12"
   },
   "scripts": {
     "start:dev": "nodemon ./src/index.js",
-    "start:prod": "node ./src/index.js"
+    "start:prod": "node ./src/index.js",
+    "tsc": "tsc"
   }
 }

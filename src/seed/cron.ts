@@ -1,6 +1,6 @@
 const CronJob = require("cron").CronJob;
 
-const initPingYeelight = () => {
+export const initPingYeelight = () => {
   new CronJob(
     "* * * * * *",
     () => {
@@ -10,8 +10,4 @@ const initPingYeelight = () => {
     true,
     "Europe/Paris"
   );
-};
-
-module.exports = {
-  initPingYeelight
 };

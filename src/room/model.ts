@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { isNil } = require("ramda");
+import * as mongoose from "mongoose";
+import { isNil } from "ramda";
 
 const Schema = mongoose.Schema;
 
@@ -22,22 +22,16 @@ const roomSchema = new Schema({
 
 const Room = mongoose.model("Room", roomSchema);
 
-const createRoom = room => new Room(room).save();
+export const createRoom = room => new Room(room).save();
 
-const upsertRoomWithUsersAndYeelight = (roomId, users, yeelights) =>
+export const upsertRoomWithUsersAndYeelight = (roomId, users, yeelights) =>
   Room.findOneAndUpdate(
     { roomId },
     { users, yeelights },
     { upsert: true }
   ).exec();
 
-const getRoomsForUser = userId =>
+export const getRoomsForUser = userId =>
   Room.find({ users: userId })
     .populate("yeelights")
     .exec();
-
-module.exports = {
-  createRoom,
-  upsertRoomWithUsersAndYeelight,
-  getRoomsForUser
-};

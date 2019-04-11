@@ -1,10 +1,10 @@
-const mqtt = require("mqtt");
+import * as mqtt from "mqtt";
 
-const { getSwitches, getSwitchWithYeelight } = require("../switch/model");
-const { getSwitchIdFromTopic, getActionFromMessage } = require("./adapter");
-const { switchRoutes } = require("./routes");
+import { getSwitches, getSwitchWithYeelight } from "../switch/model";
+import { getSwitchIdFromTopic, getActionFromMessage } from "./adapter";
+import { switchRoutes } from "./routes";
 
-initMQTT = async () => {
+export const initMQTT = async () => {
   const switches = await getSwitches();
   const client = mqtt.connect(`mqtt://${process.env.MQTT_HOST}`);
   client.on("connect", () => {
@@ -21,5 +21,3 @@ initMQTT = async () => {
     switchRoutes[action] && switchRoutes[action](deviceId);
   });
 };
-
-module.exports = { initMQTT };

@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+import * as mongoose from "mongoose";
 mongoose.Promise = Promise;
 
 const sleep = timeout =>
   new Promise(resolve => {
-    setTimeout(resolve, 3000);
+    setTimeout(resolve, timeout);
   });
 
-const initConnection = async () => {
+export const initConnection = async () => {
   try {
     console.log("Trying to connect to mongodb");
     await mongoose.connect(
@@ -26,5 +26,3 @@ const initConnection = async () => {
     return initConnection();
   }
 };
-
-module.exports = { initConnection };

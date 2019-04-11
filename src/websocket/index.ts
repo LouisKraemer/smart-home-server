@@ -1,9 +1,9 @@
-const WebSocket = require("ws");
+import * as WebSocket from "ws";
 
-const { parseIncomingMessage } = require("./utils");
-const { checkJWT, extractIdFromJWT } = require("../user/utils");
-const { isUserAllowedToReceiveUpdates } = require("../yeelight/utils");
-const { UNAUTHORIZED } = require("./constants");
+import { parseIncomingMessage } from "./utils";
+import { checkJWT, extractIdFromJWT } from "../user/utils";
+import { isUserAllowedToReceiveUpdates } from "../yeelight/utils";
+import { UNAUTHORIZED } from "./constants";
 
 const wss = new WebSocket.Server({
   port: process.env.WEBSOCKET_PORT,
@@ -21,7 +21,7 @@ const wss = new WebSocket.Server({
   }
 });
 
-const initWs = () => {
+export const initWs = () => {
   wss.on("connection", (ws, request) => {
     console.log("New ws connection !");
     const token = request.url.substring(1);
@@ -35,13 +35,13 @@ const initWs = () => {
         );
         if (shouldRespond) ws.send(payload);
       } catch (error) {
-        console.error(`Error executing message ${message}`);
+        console.error(`Error executing message ${message}`, error);
       }
     });
   });
 };
 
-broadcast = (deviceId, message) => {
+export const broadcast = (deviceId, message) => {
   wss.clients.forEach(async client => {
     const userShouldBeUpdated = await isUserAllowedToReceiveUpdates(
       deviceId,
@@ -51,9 +51,4 @@ broadcast = (deviceId, message) => {
       client.send(message);
     }
   });
-};
-
-module.exports = {
-  initWs,
-  broadcast
 };

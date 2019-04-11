@@ -1,6 +1,6 @@
-const { createUser, login } = require("./methods");
+import { createUser, login } from "./methods";
 
-const initUserRoutes = app => {
+export const initUserRoutes = app => {
   app.post("/user", async (req, res) => {
     try {
       await createUser(req.body);
@@ -18,8 +18,4 @@ const initUserRoutes = app => {
       res.status(400).send(error.message);
     }
   });
-};
-
-module.exports = {
-  initUserRoutes
 };

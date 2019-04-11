@@ -1,44 +1,35 @@
-const { getYeelightInstance } = require("./store");
+import { getYeelightInstance } from "./store";
 
-const { Color } = require("yeelight-awesome");
+import { Color } from "yeelight-awesome";
 
 const EFFECT = "smooth";
 
-const toggle = ({ deviceId }) => {
+export const toggle = ({ deviceId }) => {
   const yeelight = getYeelightInstance(deviceId);
   if (yeelight) yeelight.toggle();
 };
 
-const setPower = ({ deviceId, power }) => {
+export const setPower = ({ deviceId, power }) => {
   const yeelight = getYeelightInstance(deviceId);
   if (yeelight) yeelight.setPower(power, EFFECT);
 };
 
-const setName = ({ deviceId, name }) => {
+export const setName = ({ deviceId, name }) => {
   const yeelight = getYeelightInstance(deviceId);
   if (yeelight) yeelight.setName(name);
 };
 
-const setBright = ({ deviceId, bright }) => {
+export const setBright = ({ deviceId, bright }) => {
   const yeelight = getYeelightInstance(deviceId);
   if (yeelight) yeelight.setBright(bright, EFFECT);
 };
 
-const setColorTemperature = ({ deviceId, ct }) => {
+export const setColorTemperature = ({ deviceId, ct }) => {
   const yeelight = getYeelightInstance(deviceId);
   if (yeelight) yeelight.setCtAbx(ct, EFFECT);
 };
 
-const setRGBColor = ({ deviceId, r, g, b }) => {
+export const setRGBColor = ({ deviceId, r, g, b }) => {
   const yeelight = getYeelightInstance(deviceId);
   if (yeelight) yeelight.setRGB(new Color(r, g, b), EFFECT);
-};
-
-module.exports = {
-  toggle,
-  setPower,
-  setName,
-  setBright,
-  setColorTemperature,
-  setRGBColor
 };

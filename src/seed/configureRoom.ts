@@ -1,17 +1,17 @@
-const { pluck } = require("ramda");
+import { pluck } from "ramda";
 
-const { rooms } = require("../../config");
+import { rooms } from "../../config";
 
-const { upsertRoomWithUsersAndYeelight } = require("../room/model");
-const {
+import { upsertRoomWithUsersAndYeelight } from "../room/model";
+import {
   findUserById,
   upsertUserWithRoom,
   findUserByPseudo
-} = require("../user/model");
-const {
+} from "../user/model";
+import {
   upsertYeelightWithRoom,
   findYeelightByDeviceId
-} = require("../yeelight/model");
+} from "../yeelight/model";
 
 const updateUsersWithRoom = (userIds, roomId) =>
   Promise.all(
@@ -28,7 +28,7 @@ const updateYeelightsWithRoom = (yeelightIds, roomId) =>
     yeelightIds.map(yeelightId => upsertYeelightWithRoom(yeelightId, roomId))
   );
 
-const configureRooms = async () =>
+export const configureRooms = async () =>
   Promise.all(
     rooms.map(async ({ roomId, users, yeelights }) => {
       const usersPseudo = pluck("pseudo", users);
@@ -56,5 +56,3 @@ const configureRooms = async () =>
       ]);
     })
   );
-
-module.exports = { configureRooms };
