@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt
+    volumes:
+      - $HOME/data:/app/data
+    devices:
+      - /dev/ttyACM0
+    restart: always
+    network_mode: host
