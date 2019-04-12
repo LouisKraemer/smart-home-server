@@ -5,12 +5,26 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
+    network_mode: host
+  smart-home-db:
+    container_name: smart-home-db
+    image: mongo
+    volumes: 
+      - $HOME/data:/app/data/db
+    restart: always
+    network_mode: host
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    volumes:
+      - ./mosquitto.conf:/config/mosquitto.conf
     network_mode: host
   zigbee2mqtt:
     container_name: zigbee2mqtt
     image: koenkk/zigbee2mqtt
     volumes:
-      - $HOME/data:/app/data
+      - $HOME/data:/app/data/zigbee2mqtt
     devices:
       - /dev/ttyACM0
     restart: always
