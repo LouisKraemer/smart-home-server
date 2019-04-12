@@ -20,6 +20,7 @@ services:
     volumes:
       - ./mosquitto.conf:/config/mosquitto.conf
     network_mode: host
+    restart: always
   zigbee2mqtt:
     container_name: zigbee2mqtt
     image: koenkk/zigbee2mqtt
