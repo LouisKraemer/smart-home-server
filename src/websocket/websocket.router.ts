@@ -1,4 +1,4 @@
-import { yeelightRoutes } from "../yeelight";
+import { yeelightRoutes } from "../yeelight/yeelight.router";
 
 export const routes = {
   ...yeelightRoutes
