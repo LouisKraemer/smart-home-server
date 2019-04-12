@@ -1,9 +1,9 @@
 import * as WebSocket from "ws";
 
-import { parseIncomingMessage } from "./utils";
-import { checkJWT, extractIdFromJWT } from "../user/utils";
-import { isUserAllowedToReceiveUpdates } from "../yeelight/utils";
-import { UNAUTHORIZED } from "./constants";
+import { parseIncomingMessage } from "./websocket.service";
+import { checkJWT, extractIdFromJWT } from "../user";
+import { isUserAllowedToReceiveUpdates } from "../yeelight";
+import { UNAUTHORIZED } from "./webscoket.constants";
 
 const wss = new WebSocket.Server({
   port: process.env.WEBSOCKET_PORT,

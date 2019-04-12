@@ -1,4 +1,4 @@
-import { createUser, login } from "./methods";
+import { createUser, login } from "./user.workflows";
 
 export const initUserRoutes = app => {
   app.post("/user", async (req, res) => {

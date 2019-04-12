@@ -6,8 +6,8 @@ dotenv.config({ path: path.join(__dirname, "../.env") });
 
 import { configureRooms } from "./seed/configureRoom";
 import { configureSwitches } from "./seed/configureSwitch";
-import { initPingYeelight } from "./seed/cron";
-import { initMQTT } from "./switch/listener";
+// import { initPingYeelight } from "./seed/cron";
+import { initMQTT } from "./switch";
 
 import * as express from "express";
 
@@ -18,7 +18,7 @@ import * as bodyParser from "body-parser";
 app.use(bodyParser.json());
 
 import { initConnection } from "./database";
-import { discoverYeelight } from "./yeelight/discover";
+import { discoverYeelight } from "./yeelight";
 
 import { initWs } from "./websocket";
 

@@ -1,4 +1,4 @@
-import { initUserRoutes } from "./user/routes";
+import { initUserRoutes } from "./user";
 
 export const initRoutes = app => {
   initUserRoutes(app);

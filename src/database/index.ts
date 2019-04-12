@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+//@ts-ignore
 mongoose.Promise = Promise;
 
 const sleep = timeout =>

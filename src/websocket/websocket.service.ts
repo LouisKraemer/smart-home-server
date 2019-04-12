@@ -1,4 +1,4 @@
-import { routes } from "./routes";
+import { routes } from "./websocket.router";
 
 export const parseIncomingMessage = async (userId, message) => {
   const { type, payload } = JSON.parse(message);

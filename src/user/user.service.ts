@@ -1,7 +1,6 @@
 import * as bcrypt from "bcrypt";
 import { isNil } from "ramda";
 import * as jwt from "jsonwebtoken";
-import { findUserById } from "./model";
 
 export const areFieldsMissing = ({ firstName, lastName, pseudo }) =>
   isNil(firstName) || isNil(lastName) || isNil(pseudo);

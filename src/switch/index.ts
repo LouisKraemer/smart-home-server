@@ -1,13 +1,16 @@
-import * as mqtt from "mqtt";
+export { upsertSwitch } from "./switch.repository";
 
-import { getSwitches, getSwitchWithYeelight } from "../switch/model";
-import { getSwitchIdFromTopic, getActionFromMessage } from "./adapter";
-import { switchRoutes } from "./routes";
+import { connect } from "mqtt";
+
+import { getSwitches, getSwitchWithYeelight } from "./switch.repository";
+import { getSwitchIdFromTopic, getActionFromMessage } from "./switch.adapter";
+import { switchRoutes } from "./switch.router";
 
 export const initMQTT = async () => {
   const switches = await getSwitches();
-  const client = mqtt.connect(`mqtt://${process.env.MQTT_HOST}`);
+  const client = connect(`mqtt://${process.env.MQTT_HOST}`);
   client.on("connect", () => {
+    //@ts-ignore
     switches.map(({ switchId }) => {
       client.subscribe(`zigbee2mqtt/${switchId}`);
     });
@@ -16,6 +19,7 @@ export const initMQTT = async () => {
     const switchId = getSwitchIdFromTopic(topic);
     const action = getActionFromMessage(message);
     const {
+      //@ts-ignore
       yeelight: { deviceId }
     } = await getSwitchWithYeelight(switchId);
     switchRoutes[action] && switchRoutes[action](deviceId);

@@ -2,20 +2,14 @@ import { pluck } from "ramda";
 
 import { rooms } from "../../config";
 
-import { upsertRoomWithUsersAndYeelight } from "../room/model";
-import {
-  findUserById,
-  upsertUserWithRoom,
-  findUserByPseudo
-} from "../user/model";
-import {
-  upsertYeelightWithRoom,
-  findYeelightByDeviceId
-} from "../yeelight/model";
+import { upsertRoomWithUsersAndYeelight } from "../room";
+import { findUserById, upsertUserWithRoom, findUserByPseudo } from "../user";
+import { upsertYeelightWithRoom, findYeelightByDeviceId } from "../yeelight";
 
 const updateUsersWithRoom = (userIds, roomId) =>
   Promise.all(
     userIds.map(async userId => {
+      //@ts-ignore
       const { rooms } = await findUserById(userId);
       if (rooms.filter(room => room.equals(roomId)).length === 0) {
         return upsertUserWithRoom(userId, roomId);
@@ -31,7 +25,9 @@ const updateYeelightsWithRoom = (yeelightIds, roomId) =>
 export const configureRooms = async () =>
   Promise.all(
     rooms.map(async ({ roomId, users, yeelights }) => {
+      //@ts-ignore
       const usersPseudo = pluck("pseudo", users);
+      //@ts-ignore
       const yeelightsId = pluck("deviceId", yeelights);
       const usersRef = await Promise.all(
         usersPseudo.map(async pseudo => {

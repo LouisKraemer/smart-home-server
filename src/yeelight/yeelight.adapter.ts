@@ -1,10 +1,10 @@
 import { DevicePropery } from "yeelight-awesome";
 
-import { PROPS } from "./constants";
+import { PROPS } from "./yeelight.constants";
 
 const { BRIGHT, RGB, POWER, CT, COLOR_MODE } = DevicePropery;
 
-import { getRoomFromYeelight } from "./model";
+import { getRoomFromYeelight } from "./yeelight.repository";
 
 export const formatProps = properties =>
   properties.reduce((yeelight, currentProp, currentIndex) => {
@@ -21,17 +21,21 @@ export const formatProps = properties =>
     return { ...yeelight, [propName]: currentProp };
   }, {});
 
-export const getPower = params => params[0] === "on";
+export const getPower = (params: any[]): boolean => params[0] === "on";
 
-export const getName = params => params[0];
+export const getName = (params: any[]): string => params[0];
 
-export const getBright = params => params[0];
+export const getBright = (params: any[]): number => parseInt(params[0]);
 
-export const getColorTemperature = params => params[0];
+export const getColorTemperature = (params: any[]): number =>
+  parseInt(params[0]);
 
-export const getRBGColor = params => params[0];
+export const getRBGColor = (params: any[]): number => parseInt(params[0]);
 
-export const isUserAllowedToReceiveUpdates = async (deviceId, userId) => {
+export const isUserAllowedToReceiveUpdates = async (
+  deviceId: string,
+  userId: string
+): Promise<boolean> => {
   const {
     room: { users }
   } = await getRoomFromYeelight(deviceId);

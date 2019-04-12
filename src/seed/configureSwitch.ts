@@ -1,7 +1,7 @@
 import { switches } from "../../config";
 
-import { upsertSwitch } from "../switch/model";
-import { getYeelight } from "../yeelight/model";
+import { upsertSwitch } from "../switch";
+import { getYeelight } from "../yeelight";
 
 export const configureSwitches = async () =>
   Promise.all(
