@@ -25,17 +25,14 @@ initRoutes(app);
 
 const init = async () => {
   await initConnection();
-  if (process.env.CONFIG) {
-    await Promise.all([
-      // initPingYeelight(),
-      initMQTT(),
-      initWs(),
-      discoverYeelight()
-    ]);
-  } else {
-    await Promise.all([configureRooms(), configureSwitches()]);
-    await Promise.all([initMQTT(), discoverYeelight()]);
-  }
+  await Promise.all([configureRooms(), configureSwitches()]);
+  await Promise.all([
+    // initPingYeelight(),
+    initMQTT(),
+    initWs(),
+    discoverYeelight()
+  ]);
+
   app.listen(process.env.EXPRESS_PORT, function() {
     console.log(`Http server started on port ${process.env.EXPRESS_PORT}`);
   });
