@@ -2,9 +2,16 @@ import { pluck } from "ramda";
 
 import { rooms } from "../../config";
 
-import { upsertRoomWithUsersAndYeelight } from "../room";
-import { findUserById, upsertUserWithRoom, findUserByPseudo } from "../user";
-import { upsertYeelightWithRoom, findYeelightByDeviceId } from "../yeelight";
+import { upsertRoomWithUsersAndYeelight } from "../room/room.repository";
+import {
+  findUserById,
+  upsertUserWithRoom,
+  findUserByPseudo
+} from "../user/user.repository";
+import {
+  upsertYeelightWithRoom,
+  findYeelightByDeviceId
+} from "../yeelight/yeelight.repository";
 
 const updateUsersWithRoom = (userIds, roomId) =>
   Promise.all(

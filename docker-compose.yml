@@ -7,6 +7,10 @@ services:
       dockerfile: Dockerfile
     restart: always
     network_mode: host
+    depends_on:
+      - smart-home-db
+    environment:
+      - CONFIG=${CONFIG}
   smart-home-db:
     container_name: smart-home-db
     image: mongo

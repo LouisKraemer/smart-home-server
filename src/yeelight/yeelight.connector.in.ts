@@ -43,86 +43,106 @@ export const discoverYeelight = () => {
       lightPort: device.port
     });
 
-    yeelight.autoReconnect = true;
+    if (!process.env.CONFIG) {
+      yeelight.autoReconnect = true;
 
-    yeelight.on(
-      GET_PROPS,
-      async ({ success, result }: IEventResult): Promise<void> => {
-        if (success) {
-          const formatedProperties = formatProps(result.result);
-          await upsertYeelight(device.id, formatedProperties);
-          broadcastNewYeelightState(device.id, formatedProperties);
+      yeelight.on(
+        GET_PROPS,
+        async ({ success, result }: IEventResult): Promise<void> => {
+          if (success) {
+            const formatedProperties = formatProps(result.result);
+            await upsertYeelight(device.id, formatedProperties);
+            broadcastNewYeelightState(device.id, formatedProperties);
+          }
         }
-      }
-    );
+      );
 
-    yeelight.on(
-      SET_BRIGHT,
-      async ({ success, command: { params } }: IEventResult): Promise<void> => {
-        if (success) {
-          const bright = getBright(params);
-          await upsertYeelight(device.id, { bright });
-          broadcastNewYeelightState(device.id, { bright });
+      yeelight.on(
+        SET_BRIGHT,
+        async ({
+          success,
+          command: { params }
+        }: IEventResult): Promise<void> => {
+          if (success) {
+            const bright = getBright(params);
+            await upsertYeelight(device.id, { bright });
+            broadcastNewYeelightState(device.id, { bright });
+          }
         }
-      }
-    );
+      );
 
-    yeelight.on(
-      SET_NAME,
-      async ({ success, command: { params } }: IEventResult): Promise<void> => {
-        if (success) {
-          const name = getName(params);
-          await upsertYeelight(device.id, { name });
-          broadcastNewYeelightState(device.id, { name });
+      yeelight.on(
+        SET_NAME,
+        async ({
+          success,
+          command: { params }
+        }: IEventResult): Promise<void> => {
+          if (success) {
+            const name = getName(params);
+            await upsertYeelight(device.id, { name });
+            broadcastNewYeelightState(device.id, { name });
+          }
         }
-      }
-    );
+      );
 
-    yeelight.on(
-      SET_POWER,
-      async ({ success, command: { params } }: IEventResult): Promise<void> => {
-        if (success) {
-          const power = getPower(params);
-          await upsertYeelight(device.id, { power });
-          broadcastNewYeelightState(device.id, { power });
+      yeelight.on(
+        SET_POWER,
+        async ({
+          success,
+          command: { params }
+        }: IEventResult): Promise<void> => {
+          if (success) {
+            const power = getPower(params);
+            await upsertYeelight(device.id, { power });
+            broadcastNewYeelightState(device.id, { power });
+          }
         }
-      }
-    );
+      );
 
-    yeelight.on(
-      SET_CT_ABX,
-      async ({ success, command: { params } }: IEventResult): Promise<void> => {
-        if (success) {
-          const ct = getColorTemperature(params);
-          await upsertYeelight(device.id, { ct, color_mode: 2 });
-          broadcastNewYeelightState(device.id, { ct, color_mode: 2 });
+      yeelight.on(
+        SET_CT_ABX,
+        async ({
+          success,
+          command: { params }
+        }: IEventResult): Promise<void> => {
+          if (success) {
+            const ct = getColorTemperature(params);
+            await upsertYeelight(device.id, { ct, color_mode: 2 });
+            broadcastNewYeelightState(device.id, { ct, color_mode: 2 });
+          }
         }
-      }
-    );
+      );
 
-    yeelight.on(
-      SET_RGB,
-      async ({ success, command: { params } }: IEventResult): Promise<void> => {
-        if (success) {
-          const rgb = getRBGColor(params);
-          await upsertYeelight(device.id, { rgb, color_mode: 1 });
-          broadcastNewYeelightState(device.id, { rgb, color_mode: 1 });
+      yeelight.on(
+        SET_RGB,
+        async ({
+          success,
+          command: { params }
+        }: IEventResult): Promise<void> => {
+          if (success) {
+            const rgb = getRBGColor(params);
+            await upsertYeelight(device.id, { rgb, color_mode: 1 });
+            broadcastNewYeelightState(device.id, { rgb, color_mode: 1 });
+          }
         }
-      }
-    );
+      );
 
-    yeelight.on("connected", async () => {
-      console.log(`Yeelight ${device.id} connected`);
-      await upsertYeelight(device.id, { connected: true });
-      newYeelightInstance(device.id, yeelight);
-    });
+      yeelight.on("connected", async () => {
+        console.log(`Yeelight ${device.id} connected`);
+        await upsertYeelight(device.id, { connected: true });
+        newYeelightInstance(device.id, yeelight);
+      });
 
-    yeelight.on("disconnected", () => {
-      upsertYeelight(device.id, { connected: false });
-      console.log(`Yeelight ${device.id} disconnected`);
-    });
-    await yeelight.connect();
-    yeelight.getProperty(PROPS);
+      yeelight.on("disconnected", () => {
+        upsertYeelight(device.id, { connected: false });
+        console.log(`Yeelight ${device.id} disconnected`);
+      });
+      await yeelight.connect();
+      await yeelight.getProperty(PROPS);
+    } else {
+      await upsertYeelight(device.id, { connected: false });
+      console.log(`New yeelight upserted ${device.id}`);
+    }
   });
 
   discover.start();

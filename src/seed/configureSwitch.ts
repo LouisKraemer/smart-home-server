@@ -1,5 +1,4 @@
 import { switches } from "../../config";
-
 import { upsertSwitch } from "../switch";
 import { getYeelight } from "../yeelight";
 
