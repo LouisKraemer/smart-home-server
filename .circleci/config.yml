@@ -20,7 +20,7 @@ jobs:
             - ./node_modules
       - run:
           name: build
-          command: npm build
+          command: npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
