@@ -19,6 +19,23 @@ mongodb database running
 
 A Xiaomi Yeelight with [developer mode on](https://www.yeelight.com/en_US/developer).
 
+A .env file containing all secrets :
+
+```
+DB_HOST=localhost
+DB_PORT=27017
+
+WEBSOCKET_PORT=<choose_a_port>
+
+EXPRESS_PORT=<choose_a-port>
+
+MQTT_HOST=localhost
+
+JWT_SECRET_KEY=<generate_a_random_key>
+
+SALT=<any_integer-will-do>
+```
+
 ### Installing
 
 To install this project in develop mode, clone it and run
