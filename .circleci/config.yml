@@ -31,17 +31,17 @@ jobs:
           fingerprints:
             - "25:89:00:e0:02:7f:ff:fb:26:84:ab:b9:6f:c5:1f:8a"
       - run:
-        name: Stop server
-        command: |
-          ssh $SSH_USER@$SSH_HOST 'bash -i' < pre_deploy.sh
+          name: Stop server
+          command: |
+            ssh $SSH_USER@$SSH_HOST 'bash -i' < pre_deploy.sh
       - run:
-        name: Deploy
-        command: |
-          scp -r dist package.json yarn.lock $SSH_USER@$SSH_HOST:~/smart-home-server/
+          name: Deploy
+          command: |
+            scp -r dist package.json yarn.lock $SSH_USER@$SSH_HOST:~/smart-home-server/
       - run:
-        name: Start server
-        command: |
-          ssh $SSH_USER@$SSH_HOST 'bash -i' < post_deploy.sh
+          name: Start server
+          command: |
+            ssh $SSH_USER@$SSH_HOST 'bash -i' < post_deploy.sh
 
 workflows:
   version: 2
