@@ -22,18 +22,20 @@ jobs:
           name: build
           command: npm build
       - persist_to_workspace:
-          root: /.
+          root: ~/project
           paths:
             - dist
             - package.json
             - yarn.lock
+            - pre_deploy.sh
+            - post_deploy.sh
   deploy:
     working_directory: ~/project
     docker:
       - image: circleci/node
     steps:
       - attach_workspace:
-          at: /.
+          at: ~/project
       - add_ssh_keys:
           fingerprints:
             - "25:89:00:e0:02:7f:ff:fb:26:84:ab:b9:6f:c5:1f:8a"
