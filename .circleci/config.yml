@@ -26,6 +26,7 @@ jobs:
           paths:
             - dist
             - package.json
+            - config.js
             - yarn.lock
             - pre_deploy.sh
             - post_deploy.sh
@@ -50,7 +51,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-            scp -r dist package.json yarn.lock $SSH_USER@$SSH_HOST:~/smart-home-server/
+            scp -r dist package.json yarn.lock config.js $SSH_USER@$SSH_HOST:~/smart-home-server/
       - run:
           name: Start server
           command: |
