@@ -15,7 +15,7 @@ import {
   getRBGColor
 } from "./yeelight.adapter";
 
-import { upsertYeelight } from "./yeelight.repository";
+import { upsertYeelight, getYeelight } from "./yeelight.repository";
 import { newYeelightInstance } from "./yeelight.store";
 import { broadcastNewYeelightState } from "./yeelight.connector.out";
 import { PROPS } from "./yeelight.constants";
@@ -52,6 +52,19 @@ export const discoverYeelight = () => {
           const formatedProperties = formatProps(result.result);
           await upsertYeelight(device.id, formatedProperties);
           broadcastNewYeelightState(device.id, formatedProperties);
+        }
+      }
+    );
+
+    yeelight.on(
+      TOGGLE,
+      async ({ success }: IEventResult): Promise<void> => {
+        if (success) {
+          const { power: previousPower } = await getYeelight({
+            deviceId: device.id
+          });
+          await upsertYeelight(device.id, { power: !previousPower });
+          broadcastNewYeelightState(device.id, { power: !previousPower });
         }
       }
     );
