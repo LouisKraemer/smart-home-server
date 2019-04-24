@@ -17,4 +17,6 @@ const roomSchema = new Schema({
   ]
 });
 
+const test = "oui";
+
 export const Room = model("Room", roomSchema);
